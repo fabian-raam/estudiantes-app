@@ -37,8 +37,8 @@ fun main() {
     // Calcular total a pagar
     val totalPagar = totalCreditos * valorCredito
 
-    // Determinar carga académica
-    val cargaAcademica: String
+    // Determinar carga académica (inicializada con valor por defecto)
+    var cargaAcademica: String
     var autorizacion = false
 
     if (totalCreditos == 12.0) {
@@ -49,16 +49,19 @@ fun main() {
         cargaAcademica = "Requiere Autorización"
 
         // Validación de autorización
-        print("\n️  La carga académica excede el límite. ¿Autoriza esta matrícula? (si/no): ")
+        print("\n  La carga académica excede el límite. ¿Autoriza esta matrícula? (si/no): ")
         val respuesta = readLine()?.lowercase() ?: ""
 
         if (respuesta == "si") {
             autorizacion = true
         } else {
-            println("\n MATRÍCULA CANCELADA POR EXCESO DE CREDITOS")
+            println("\nMATRÍCULA CANCELADA POR EXCESO DE CREDITOS")
             println("Hasta luego, $nombreEstudiante")
             return // Sal del programa inmediatamente
         }
+    } else {
+        // Crédidos menores a 12
+        cargaAcademica = "Carga Mínima"
     }
 
     // Determinar forma de pago (cuotas)
@@ -68,4 +71,33 @@ fun main() {
     } else {
         formaPago = 2
     }
+
+    // PARTE 3: IMPRESIÓN DEL RESULTADO FINAL
+    println()
+    println("======================================")
+    println("         RECIBO DE MATRÍCULA          ")
+    println("======================================")
+    println()
+    println("Estudiante: $nombreEstudiante")
+    println()
+    println("Curso\t\t\tCreditos\tCosto")
+    println("--------------------------------------")
+
+    for (i in 0..cantidadCursos - 1) {
+        val costoCurso = creditosCursos[i] * valorCredito
+        val nombreCurso = nombresCursos[i].padEnd(20, ' ')
+        val creditosStr = creditosCursos[i].toInt().toString().padStart(8, ' ')
+        val costoStr = String.format("%.0f", costoCurso).padStart(10, ' ')
+        println("$nombreCurso $creditosStr $costoStr")
+    }
+
+    println("--------------------------------------")
+    println()
+    println("Cursos matriculados: ${nombresCursos.size}")
+    println("Total de créditos: ${totalCreditos.toInt()}")
+    println("Total a pagar: $totalPagar")
+    println("Carga Académica: $cargaAcademica")
+    println("Forma de pago: $formaPago cuotas")
+    println()
+    println("======================================")
 }
