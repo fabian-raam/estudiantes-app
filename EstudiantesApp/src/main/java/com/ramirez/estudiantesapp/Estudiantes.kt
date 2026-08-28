@@ -49,13 +49,13 @@ fun main() {
         cargaAcademica = "Requiere Autorización"
 
         // Validación de autorización
-        print("\n⚠️  La carga académica excede el límite. ¿Autoriza esta matrícula? (si/no): ")
+        print("\n️  La carga académica excede el límite. ¿Autoriza esta matrícula? (si/no): ")
         val respuesta = readLine()?.lowercase() ?: ""
 
         if (respuesta == "si") {
             autorizacion = true
         } else {
-            println("\n❌ MATRÍCULA CANCELADA POR EXCESO DE CREDITOS")
+            println("\n MATRÍCULA CANCELADA POR EXCESO DE CREDITOS")
             println("Hasta luego, $nombreEstudiante")
             return // Sale del programa inmediatamente
         }
