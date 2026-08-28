@@ -57,7 +57,7 @@ fun main() {
         } else {
             println("\n MATRÍCULA CANCELADA POR EXCESO DE CREDITOS")
             println("Hasta luego, $nombreEstudiante")
-            return // Sale del programa inmediatamente
+            return // Sal del programa inmediatamente
         }
     }
 
