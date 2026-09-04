@@ -22,6 +22,21 @@ fun main() {
             print("Ingrese valor de un crédito: ")
             val valorCredito = readLine()?.toDouble() ?: return
 
+            print("\nCategoría (1: Ordinario, 2: Becario): ")
+            val opcionCategoria = readLine()?.toInt() ?: 1
+
+            var esBecario = false
+            var costoMatricula = 0.0
+
+            if (opcionCategoria == 1) {
+                esBecario = false
+                print("Costo de matrícula: ")
+                costoMatricula = readLine()?.toDouble() ?: 0.0
+            } else {
+                esBecario = true
+                costoMatricula = 0.0
+            }
+
             print("\nSeleccione turno (1: Mañana, 2: Tarde, 3: Noche): ")
             val opcionTurno = readLine()?.toInt() ?: 1
 
@@ -63,7 +78,8 @@ fun main() {
             }
 
             // Calcular total a pagar
-            val totalPagar = (totalCreditos * valorCredito) * (1 + porcentajeRecargo)
+            val totalCreditosCosto = totalCreditos * valorCredito
+            val totalPagar = if (esBecario) totalCreditosCosto else totalCreditosCosto + costoMatricula
 
             // Determinar carga académica (inicializada con valor por defecto)
             var cargaAcademica: String
@@ -110,6 +126,13 @@ fun main() {
             println()
             println("Estudiante: $nombreEstudiante")
             println()
+            if (esBecario) {
+                println("Categoría: Becario")
+                println("Matrícula: No aplica")
+            } else {
+                println("Categoría: Ordinario")
+                println("Matrícula: $costoMatricula")
+            }
             println("Turno: $nombreTurno")
             println("Curso\t\t\tCreditos\tCosto")
             println("--------------------------------------")
@@ -117,11 +140,10 @@ fun main() {
             for (i in 0..cantidadCursos - 1) {
                 val costoCurso = creditosCursos[i] * valorCredito
                 val nombreCurso = nombresCursos[i].padEnd(20, ' ')
-                val creditosStr = creditosCursos[i].toInt().toString().padStart(8, ' ')
-                val costoStr = String.format("%.0f", costoCurso).padStart(10, ' ')
+                val creditosStr = creditosCursos[i].toInt().toString().padStart(6, ' ')
+                val costoStr = String.format("%.0f", costoCurso).padStart(8, ' ')
                 println("$nombreCurso $creditosStr $costoStr")
             }
-
             println("--------------------------------------")
             println()
             println("Cursos matriculados: ${nombresCursos.size}")
