@@ -22,6 +22,23 @@ fun main() {
             print("Ingrese valor de un crédito: ")
             val valorCredito = readLine()?.toDouble() ?: return
 
+            print("\nSeleccione turno (1: Mañana, 2: Tarde, 3: Noche): ")
+            val opcionTurno = readLine()?.toInt() ?: 1
+
+            var porcentajeRecargo = 0.0
+            var nombreTurno = ""
+
+            when(opcionTurno) {
+                1 -> { nombreTurno = "Mañana"; porcentajeRecargo = 0.10 }
+                2 -> { nombreTurno = "Tarde"; porcentajeRecargo = 0.15 }
+                3 -> { nombreTurno = "Noche"; porcentajeRecargo = 0.20 }
+                else -> {
+                    println("Opción inválida. Usando turno Mañana por defecto.")
+                    nombreTurno = "Mañana"
+                    porcentajeRecargo = 0.10
+                }
+            }
+
             // Listas para almacenar nombres de cursos y créditos
             val nombresCursos = mutableListOf<String>()
             val creditosCursos = mutableListOf<Double>()
@@ -46,7 +63,7 @@ fun main() {
             }
 
             // Calcular total a pagar
-            val totalPagar = totalCreditos * valorCredito
+            val totalPagar = (totalCreditos * valorCredito) * (1 + porcentajeRecargo)
 
             // Determinar carga académica (inicializada con valor por defecto)
             var cargaAcademica: String
@@ -93,6 +110,7 @@ fun main() {
             println()
             println("Estudiante: $nombreEstudiante")
             println()
+            println("Turno: $nombreTurno")
             println("Curso\t\t\tCreditos\tCosto")
             println("--------------------------------------")
 
