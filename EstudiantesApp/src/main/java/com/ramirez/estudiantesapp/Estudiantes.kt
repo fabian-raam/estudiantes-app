@@ -72,6 +72,8 @@ fun main() {
         formaPago = 2
     }
 
+    // Calcular valor de cada cuota
+    val valorCuota = totalPagar / formaPago
     // PARTE 3: IMPRESIÓN DEL RESULTADO FINAL
     println()
     println("======================================")
@@ -98,6 +100,7 @@ fun main() {
     println("Total a pagar: $totalPagar")
     println("Carga Académica: $cargaAcademica")
     println("Forma de pago: $formaPago cuotas")
+    println("Valor de cuota: $valorCuota ")
     println()
     println("======================================")
 }
